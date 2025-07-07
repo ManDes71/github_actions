@@ -29,7 +29,7 @@ jobs:
       - name: Run flake8
         uses: py-actions/flake8@v2
 
-     - name: Illustration de l'utilisation du secret
+      - name: Illustration de l'utilisation du secret
         run: |
           # On affiche la variable : la vraie valeur restera masquée dans les logs
           echo "Le secret MY_API_TOKEN vaut : $MY_API_TOKEN"
