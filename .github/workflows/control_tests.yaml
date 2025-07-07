@@ -1,13 +1,22 @@
 name: Control Push
 on: push
+
+# ① Définition globale : disponible partout
+env:
+  APP_ENV: developpement
+  NON_SECRET_VAR: "hello-world"
+
 jobs:
   qa:
     name: Check tests
     runs-on: ubuntu-22.04
 
     environment: developpement
+
+    # ② Définition au niveau du job (fusionnée avec la globale)	
     env:
-      MY_API_TOKEN: ${{ secrets.MY_API_TOKEN }}			
+      MY_API_TOKEN: ${{ secrets.MY_API_TOKEN }}
+      JOB_ONLY_VAR: "variable-de-job"			
     steps:
       - name: Checkout on master
         uses: actions/checkout@v3
@@ -30,7 +39,15 @@ jobs:
         uses: py-actions/flake8@v2
         continue-on-error: true
 
-      - name: Illustration de l'utilisation du secret
+      - name: Illustration des variables
         run: |
-          # On affiche la variable : la vraie valeur restera masquée dans les logs
-          echo "Le secret MY_API_TOKEN vaut : $MY_API_TOKEN"
+          # Variables globales
+          echo "APP_ENV = $APP_ENV"
+          echo "NON_SECRET_VAR = $NON_SECRET_VAR"
+
+          # Variables de job
+          echo "JOB_ONLY_VAR = $JOB_ONLY_VAR"
+
+          # Secret (masqué)
+          echo "MY_API_TOKEN = $MY_API_TOKEN"	
+
