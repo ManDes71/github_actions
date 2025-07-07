@@ -5,7 +5,7 @@ jobs:
     name: Check tests
     runs-on: ubuntu-22.04
 
-    environnement: developpement
+    environment: developpement
     env:
       MY_API_TOKEN: ${{ secrets.MY_API_TOKEN }}			
     steps:
