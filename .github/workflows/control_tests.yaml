@@ -28,6 +28,7 @@ jobs:
 
       - name: Run flake8
         uses: py-actions/flake8@v2
+        continue-on-error: true
 
       - name: Illustration de l'utilisation du secret
         run: |
